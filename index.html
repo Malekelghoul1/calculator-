@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>آلة حاسبة بنفسجية مع رابط يوتيوب</title>
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #2e0854;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    color: #d1b3ff;
+  }
+  .youtube-link {
+    margin-bottom: 5px;
+    font-size: 1em;
+    color: #b19aff;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .youtube-link:hover {
+    color: #d1b3ff;
+  }
+  .header {
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 3em;
+    margin: 0;
+    text-shadow: 0 0 10px #9a59b5;
+  }
+  .calculator {
+    background: #5a2a8a;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #9a59b5;
+    padding: 20px;
+    width: 320px;
+  }
+  .display {
+    background: #311b5a;
+    color: #eee;
+    font-size: 2em;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: right;
+    margin-bottom: 20px;
+    user-select: none;
+    min-height: 50px;
+  }
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
+  button {
+    background: #7d49b8;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.3em;
+    padding: 15px 0;
+    cursor: pointer;
+    box-shadow: 0 5px #5d3582;
+    transition: background 0.3s;
+  }
+  button:active {
+    box-shadow: none;
+    transform: translateY(3px);
+  }
+  button.operator {
+    background: #9b6fd8;
+  }
+  button.clear {
+    background: #d64f4f;
+  }
+  button.zero {
+    grid-column: span 2;
+  }
+</style>
+</head>
+<body>
+  <a href="https://www.youtube.com/@Malek_gamer01" target="_blank" class="youtube-link" rel="noopener noreferrer">قناتي على يوتيوب</a>
+  <div class="header">
+    <h1>أحبك</h1>
+  </div>
+  <div class="calculator">
+    <div id="display" class="display">0</div>
+    <div class="buttons">
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="appendValue('(')">(</button>
+      <button onclick="appendValue(')')">)</button>
+      <button class="operator" onclick="appendValue('/')">÷</button>
+
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button class="operator" onclick="appendValue('*')">×</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button class="operator" onclick="appendValue('-')">−</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button class="operator" onclick="appendValue('+')">+</button>
+
+      <button class="zero" onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+      <button class="operator" onclick="calculateResult()">=</button>
+    </div>
+  </div>
+
+<script>
+  const display = document.getElementById('display');
+  let currentInput = '';
+
+  function appendValue(val) {
+    if (currentInput === '0' && val !== '.') {
+      currentInput = val;
+    } else {
+      currentInput += val;
+    }
+    display.textContent = currentInput;
+  }
+
+  function clearDisplay() {
+    currentInput = '';
+    display.textContent = '0';
+  }
+
+  function calculateResult() {
+    try {
+      let result = eval(currentInput);
+      display.textContent = result;
+      currentInput = result.toString();
+    } catch {
+      display.textContent = 'خطأ';
+      currentInput = '';
+    }
+  }
+</script>
+</body>
+</html>
